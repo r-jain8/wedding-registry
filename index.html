@@ -149,9 +149,9 @@ footer p { margin: 0 0 10px; }
 (function () {
   'use strict';
 
-  // Shared claim list. Leave null for preview mode (claims stay in this browser only).
-  // After the Firebase setup described in SETUP.md, fill in: { projectId: '...', apiKey: '...' }
-  const FIREBASE = null;
+  // Shared claim list: the Google Apps Script web-app URL (ends in /exec) from SETUP.md.
+  // Leave null for preview mode (claims stay in this browser only).
+  const SHEET_API = 'https://script.google.com/macros/s/AKfycbxcmDBSjTEjFpmfUhHK0nTz-B7wmvdTzteOlH_Bgx2p25TQ0wC7kmA7bxKXqgquHM2Ifg/exec';
 
   const idealo = q => 'https://www.idealo.de/preisvergleich/MainSearchProductCategory.html?q=' + encodeURIComponent(q);
   const amazon = q => 'https://www.amazon.de/s?k=' + encodeURIComponent(q);
@@ -288,32 +288,35 @@ footer p { margin: 0 0 10px; }
     }
   };
 
-  function str(f) { return f && typeof f.stringValue === 'string' ? f.stringValue : ''; }
-  const FirestoreStore = FIREBASE && {
+  // Google Sheet behind an Apps Script web app (see apps-script.gs). GET returns every claim,
+  // POST writes one slot with a version check so two people cannot claim the same slot at once.
+  const SheetStore = SHEET_API && {
     preview: false,
-    base: 'https://firestore.googleapis.com/v1/projects/' + FIREBASE.projectId + '/databases/(default)/documents/claims',
-    async load() {
-      const r = await fetch(this.base + '?pageSize=300&key=' + FIREBASE.apiKey, { cache: 'no-store' });
-      if (!r.ok) throw new Error('load ' + r.status);
-      const j = await r.json();
+    parse(j) {
       const m = new Map();
-      for (const d of (j.documents || [])) {
-        const f = d.fields || {};
-        m.set(d.name.split('/').pop(), { status: str(f.status), name: str(f.name), token: str(f.token), at: str(f.at), version: d.updateTime });
+      for (const [k, c] of Object.entries(j.claims || {})) {
+        m.set(k, { status: c.status || 'open', name: c.name || '', token: c.token || '', at: c.at || '', version: Number(c.version) || 0 });
       }
       return m;
     },
+    async load() {
+      const r = await fetch(SHEET_API + '?t=' + Date.now(), { cache: 'no-store' });
+      if (!r.ok) throw new Error('load ' + r.status);
+      const j = await r.json();
+      if (!j.ok) throw new Error('load');
+      return this.parse(j);
+    },
     async write(docId, data, expected) {
-      const pre = expected ? 'currentDocument.updateTime=' + encodeURIComponent(expected) : 'currentDocument.exists=false';
-      const body = { fields: {
-        status: { stringValue: data.status }, name: { stringValue: data.name },
-        token: { stringValue: data.token }, at: { stringValue: data.at } } };
-      const r = await fetch(this.base + '/' + docId + '?key=' + FIREBASE.apiKey + '&' + pre, {
-        method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
-      if (!r.ok) { const e = new Error('write ' + r.status); e.conflict = r.status === 400 || r.status === 409 || r.status === 412; throw e; }
+      // text/plain keeps the browser from sending a preflight request, which Apps Script cannot answer.
+      const r = await fetch(SHEET_API, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify({ slot: docId, status: data.status, name: data.name, token: data.token, expected: expected || 0 }) });
+      if (!r.ok) throw new Error('write ' + r.status);
+      const j = await r.json();
+      if (!j.ok) { const e = new Error(j.error || 'write'); e.conflict = j.error === 'conflict'; throw e; }
     }
   };
-  const store = FirestoreStore || LocalStore;
+  // Inside the claude.ai preview the page cannot reach Google, so it stays in preview mode there.
+  const store = (SheetStore && !window.claude) ? SheetStore : LocalStore;
 
   // ---------- state
   const slots = [];
@@ -520,7 +523,7 @@ footer p { margin: 0 0 10px; }
 
   buildPage();
   refresh();
-  setInterval(() => { if (document.visibilityState === 'visible') refresh(); }, 45000);
+  setInterval(() => { if (document.visibilityState === 'visible') refresh(); }, 60000);
   document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible') refresh(); });
 })();
 </script>
