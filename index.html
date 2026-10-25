@@ -56,7 +56,10 @@ body {
 h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(42px, 7vw, 68px); line-height: 1.02; letter-spacing: -.01em; margin: 0 0 22px; text-wrap: balance; }
 .lede { font-size: 19px; max-width: 62ch; margin: 0 0 22px; }
 .how { margin: 0; padding-left: 1.3em; max-width: 62ch; color: var(--muted); }
-.how li { margin: 6px 0; padding-left: 4px; }
+.how li { margin: 8px 0; padding-left: 4px; }
+.how strong { color: var(--ink); font-weight: 600; }
+.how-title { margin: 0 0 8px; font-weight: 600; max-width: 62ch; }
+.thanks { margin: 22px 0 0; max-width: 62ch; }
 .progress { display: flex; align-items: center; gap: 16px; padding-block: 18px; border-bottom: 1px solid var(--line); }
 .bar { flex: 1; height: 6px; background: var(--line); border-radius: 3px; overflow: hidden; }
 .bar span { display: block; height: 100%; width: 0; background: var(--accent); transition: width .4s ease; }
@@ -118,12 +121,14 @@ footer p { margin: 0 0 10px; }
   <header class="masthead">
     <p class="eyebrow">Wedding registry &middot; Berlin</p>
     <h1>Raunak &amp; Prateek</h1>
-    <p class="lede">So we've been getting a lot of questions around our wedding registry and we don't have one. But we tried to put together a quick list of things we're planning on getting for ourselves in the next year or so. So here you go:</p>
+    <p class="lede">We’ve been getting quite a few questions about our wedding registry! We haven’t had the time to research individual items and weigh the pros and cons, so instead, we’ve put together a quick list of things we’re planning to get for ourselves over the next year or so. If you’d like to get us something, here are a few ideas!</p>
+    <p class="how-title">A few things to keep in mind:</p>
     <ol class="how">
-      <li>Pick something from the list below.</li>
-      <li>You can check an item off the list to mark it covered (can also team up if needed, just add everyone's names) to help avoid duplicates. Please do so before purchasing to avoid any conflicts!</li>
-      <li>Please note that these are just a few suggestions; you can get whatever you want outside these things too. Also, these are very low-researched options generated literally by AI, so we've tried to describe the core intent/purpose per item to help you make a better decision if needed.</li>
+      <li><strong>Avoid duplicates:</strong> Please check an item off the list <em>before</em> purchasing it. Feel free to team up on bigger gifts — just add everyone’s names so we know who to thank!</li>
+      <li><strong>About the links:</strong> Apart from the NAS setup, these are quick, AI-generated suggestions that haven’t been thoroughly researched. We’ve described the main purpose of each item so you can find an option that fits.</li>
+      <li><strong>Think beyond the list:</strong> These are just suggestions, not a strict registry. Feel free to pick something else you think we’d love!</li>
     </ol>
+    <p class="thanks">Thank you for thinking of us. We really appreciate it! ❤️</p>
   </header>
 
   <section class="progress" aria-label="Registry progress">
