@@ -77,6 +77,10 @@ h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(42px, 
 .picks { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
 .reqs { margin: 0 0 4px; padding-left: 1.2em; max-width: 62ch; display: grid; gap: 7px; }
 .reqs li { padding-left: 3px; }
+.req-tag { display: inline-block; font-size: 11px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; line-height: 1.5; padding: 1px 7px; border-radius: 4px; margin-right: 8px; vertical-align: 2px; white-space: nowrap; }
+.reqs li.must .req-tag { background: var(--covered); color: var(--covered-ink); }
+.reqs li.nice .req-tag { background: var(--surface); color: var(--muted); border: 1px solid var(--line); }
+.reqs li.nice { color: var(--muted); }
 .pick { padding: 12px 14px; border: 1px solid var(--line); border-radius: 6px; background: var(--surface); min-width: 0; }
 .pick-head { display: flex; justify-content: space-between; gap: 8px 14px; flex-wrap: wrap; align-items: baseline; }
 .pick-name { font-weight: 600; }
@@ -186,30 +190,30 @@ footer p { margin: 0 0 10px; }
       { id: 'toaster', name: 'A good toaster', slots: 1,
         why: 'Breakfast is the one meal we always manage together.',
         reqs: [
-          'Two slots, wide and long enough for a thick slice or half a bagel.',
-          'Adjustable browning plus defrost and reheat. A bagel setting is a bonus.',
-          'Removable crumb tray, and a lever you can lift to peek without cancelling.',
-          'A metal body that can live on the counter. Cream, white or pastel green would all suit us.',
-          'Rough budget: €100 to 170.'
+          { must: true,  text: 'At least two slots, wide and long enough for a thick slice or half a bagel.' },
+          { must: true,  text: 'Adjustable browning plus defrost and reheat.' },
+          { must: true,  text: 'Removable crumb tray.' },
+          { must: false, text: 'A bagel setting.' },
+          { must: false, text: 'A lever you can lift to peek without cancelling.' },
+          { must: false, text: 'A metal body that can live on the counter. Cream, white or pastel green would all suit us.' }
         ],
         note: '' },
       { id: 'airfryer', name: 'A good air fryer', slots: 1,
         why: 'Weeknight dinners for two without heating the whole oven, and crisp things without a litre of oil.',
         reqs: [
-          'Two baskets or drawers, so the main and the vegetables cook at the same time.',
-          'Around 7 to 9 litres in total: enough for two with leftovers, small enough for our counter.',
-          'A sync or match function so both drawers finish together.',
-          'Dishwasher-safe, non-stick baskets.',
-          'Rough budget: €150 to 200. We have counter space for one, so one is plenty.'
+          { must: true,  text: 'Two baskets or drawers, so the main and the vegetables cook at the same time.' },
+          { must: true,  text: 'Around 7 to 9 litres in total: enough for two with leftovers, small enough for our counter.' },
+          { must: true,  text: 'Dishwasher-safe, non-stick baskets.' },
+          { must: false, text: 'A sync or match function so both drawers finish together.' }
         ],
-        note: '' },
+        note: 'We have counter space for one, so one is plenty.' },
       { id: 'knives', name: 'Two or three sharp kitchen knives', slots: 1,
-        why: 'We are not chefs. We just want a chef’s knife and a small one that are properly sharp, stay that way, and do not need a whetstone ritual.',
+        why: 'We are not chefs. We just want a chef’s knife and a small one that are properly sharp and stay that way without much effort.',
         reqs: [
-          'A chef’s knife around 20 cm and a paring knife. A serrated bread knife would be the optional third. Max three.',
-          'German-style stainless steel (the Zwilling, Wüsthof, Victorinox kind): tough, and a few pulls through a sharpener keeps it sharp. Not hard Japanese steel that chips and needs a whetstone.',
-          'Forged or stamped are both fine. A comfortable handle matters more than the brand.',
-          'Under €150 all in. A small pull-through sharpener thrown in would be the perfect extra.'
+          { must: true,  text: 'A chef’s knife around 20 cm and a paring knife. Max three knives.' },
+          { must: true,  text: 'Properly sharp out of the box and easy to keep that way. German or Japanese steel are both fine; if it wants a whetstone, one in the box is perfect.' },
+          { must: false, text: 'A comfortable handle. Forged or stamped are both fine.' },
+          { must: false, text: 'A small pull-through sharpener thrown in.' }
         ],
         note: '' }
     ]},
@@ -219,9 +223,9 @@ footer p { margin: 0 0 10px; }
         picks: [
           { name: 'Dyson V8 Cyclone (Motorbar)', price: 'approx. €300 to 400',
             spec: 'The current V8: 150 AW suction, up to 60 minutes, 0.54 L bin, 2.6 kg. Comes with the Motorbar anti-tangle head, a crevice tool and a wall dock. List price €399; Dyson.de sells it for €299 with the code DYSON shown on their own page.',
-            links: [['Dyson.de', 'https://www.dyson.de/staubsauger/kabellos/v8-cyclone/motorbar-schwarz'], ['Compare prices on idealo', idealo('Dyson V8 Cyclone')]] },
+            links: [['Dyson.de (official)', 'https://www.dyson.de/staubsauger/kabellos/v8-cyclone/motorbar-schwarz']] },
           { name: 'Dyson V8 Absolute', price: 'approx. €330 to 350',
-            spec: 'The long-running V8 with the fuller kit: Motorbar head plus the Fluffy soft-roller head for hard floors, hair screw tool, crevice and combination tools. 115 AW, up to 40 minutes, 2.5 kg. Sold out on Dyson.de, widely stocked elsewhere.',
+            spec: 'The long-running V8 with the fuller kit: Motorbar head plus the Fluffy soft-roller head for hard floors, hair screw tool, crevice and combination tools. 115 AW, up to 40 minutes, 2.5 kg. Dyson.de has replaced it with the Cyclone, so this one comes from retailers.',
             links: [['Compare prices on idealo', idealo('Dyson V8 Absolute')], ['Geizhals', 'https://geizhals.de/?fs=dyson+v8+absolute']] }
         ],
         note: 'Either one does the hair job. The Motorbar head is the part that matters; the rest is tools.' }
@@ -320,7 +324,8 @@ footer p { margin: 0 0 10px; }
         el('h2', null, g.title),
         g.sub ? el('p', { class: 'group-sub' }, g.sub) : null);
       for (const item of g.items) {
-        const reqs = item.reqs && item.reqs.length ? el('ul', { class: 'reqs' }, ...item.reqs.map(t => el('li', null, t))) : null;
+        const reqs = item.reqs && item.reqs.length ? el('ul', { class: 'reqs' }, ...item.reqs.map(r =>
+          el('li', { class: r.must ? 'must' : 'nice' }, el('span', { class: 'req-tag' }, r.must ? 'Must have' : 'Good to have'), r.text))) : null;
         const picks = item.picks && item.picks.length ? el('ul', { class: 'picks' }) : null;
         for (const p of item.picks || []) {
           const links = el('p', { class: 'links' });
