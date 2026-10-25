@@ -75,6 +75,8 @@ h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(42px, 
 .gift h3 { font-family: var(--font-display); font-weight: 500; font-size: 25px; line-height: 1.15; margin: 0 0 6px; text-wrap: balance; }
 .why { margin: 0 0 14px; color: var(--muted); max-width: 62ch; }
 .picks { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.reqs { margin: 0 0 4px; padding-left: 1.2em; max-width: 62ch; display: grid; gap: 7px; }
+.reqs li { padding-left: 3px; }
 .pick { padding: 12px 14px; border: 1px solid var(--line); border-radius: 6px; background: var(--surface); min-width: 0; }
 .pick-head { display: flex; justify-content: space-between; gap: 8px 14px; flex-wrap: wrap; align-items: baseline; }
 .pick-name { font-weight: 600; }
@@ -183,50 +185,46 @@ footer p { margin: 0 0 10px; }
     { title: 'In the kitchen', sub: '', items: [
       { id: 'toaster', name: 'A good toaster', slots: 1,
         why: 'Breakfast is the one meal we always manage together.',
-        picks: [
-          { name: 'Smeg TSF01 two-slice toaster', price: 'approx. €130 to 170',
-            spec: 'The 50s-style one. 950 W, six browning levels, bagel, defrost and reheat settings, removable crumb tray. List price €199, usually sold for less.',
-            links: [['MediaMarkt (white, matte)', 'https://www.mediamarkt.de/de/product/_smeg-50s-style-tsf01whmeu-toaster-2-scheibe-950-watt-schlitze-2-94711190.html'], ['Compare prices on idealo', idealo('Smeg TSF01')]] },
-          { name: 'Alternative: KitchenAid 5KMT2204', price: 'approx. €120',
-            spec: 'Two long slots, metal body, same job with a different look.',
-            links: [['Compare prices on idealo', idealo('KitchenAid 5KMT2204')]] }
+        reqs: [
+          'Two slots, wide and long enough for a thick slice or half a bagel.',
+          'Adjustable browning plus defrost and reheat. A bagel setting is a bonus.',
+          'Removable crumb tray, and a lever you can lift to peek without cancelling.',
+          'A metal body that can live on the counter. Cream, white or pastel green would all suit us.',
+          'Rough budget: €100 to 170.'
         ],
-        note: 'Any colour you like. Cream, white or pastel green would all suit us.' },
+        note: '' },
       { id: 'airfryer', name: 'A good air fryer', slots: 1,
         why: 'Weeknight dinners for two without heating the whole oven, and crisp things without a litre of oil.',
-        picks: [
-          { name: 'Philips Airfryer 5000 Series Dual Basket (NA555/09)', price: 'approx. €200',
-            spec: 'Two independent baskets, so the vegetables and the main cook at the same time. Steam function, dishwasher-safe parts. Expert Reviews’ air fryer of the year 2026.',
-            links: [['Compare prices on idealo', idealo('Philips Airfryer NA555')], ['Amazon.de', amazon('Philips Airfryer 5000 Series NA555')]] },
-          { name: 'Alternative: Ninja Foodi Dual Zone (AF300EU)', price: 'approx. €180',
-            spec: '7.6 litres across two drawers, Sync and Match modes so both finish together, very easy to clean.',
-            links: [['Compare prices on idealo', idealo('Ninja Foodi Dual Zone AF300EU')]] }
+        reqs: [
+          'Two baskets or drawers, so the main and the vegetables cook at the same time.',
+          'Around 7 to 9 litres in total: enough for two with leftovers, small enough for our counter.',
+          'A sync or match function so both drawers finish together.',
+          'Dishwasher-safe, non-stick baskets.',
+          'Rough budget: €150 to 200. We have counter space for one, so one is plenty.'
         ],
-        note: 'Either model is a great choice. We have counter space for one, so one is plenty.' },
+        note: '' },
       { id: 'knives', name: 'Two or three sharp kitchen knives', slots: 1,
         why: 'We are not chefs. We just want a chef’s knife and a small one that are properly sharp, stay that way, and do not need a whetstone ritual.',
-        picks: [
-          { name: 'Zwilling Pro 2-piece set (chef’s knife + paring knife, 38430-004)', price: 'approx. €95 to 120',
-            spec: 'Forged in Solingen. German steel that is easy to keep sharp: a few pulls through a sharpener every couple of months is all it needs. Exactly the two knives we actually use.',
-            links: [['Compare prices on idealo', idealo('Zwilling Pro Messerset 2-teilig 38430-004')], ['Amazon.de', amazon('Zwilling Pro Messerset 2-teilig')]] },
-          { name: 'Alternative: Victorinox Swiss Classic chef’s knife 20 cm + paring knife', price: 'approx. €50 to 65 for both',
-            spec: 'The restaurant-kitchen workhorse. Light, stamped steel, sharp out of the box and the easiest of all to keep sharp.',
-            links: [['Compare prices on idealo', idealo('Victorinox Swiss Classic Kochmesser 20 cm')], ['Amazon.de', amazon('Victorinox Swiss Classic Kochmesser Gemüsemesser')]] }
-        ],
-        note: 'Max three knives, under €150 all in. A small pull-through sharpener thrown in would be the perfect extra.' }
-    ]},
-    { title: 'Around the flat', sub: '', items: [
-      { id: 'vacuum', name: 'A strong cordless vacuum', slots: 1,
-        why: 'The one thing it must do: pull long hair out of the carpet, so it needs a motorised brush head and real suction. Beyond that, sofa cushions, corners, the balcony and the cobwebs on the ceiling, so a stick that converts to a handheld with a crevice tool. Budget up to €200.',
-        picks: [
-          { name: 'Proscenic P20 OnePass', price: 'approx. €150',
-            spec: 'Stick and handheld in one, motorised brush head, crevice and upholstery tools included.',
-            links: [['Compare prices on idealo', idealo('Proscenic P20 OnePass')], ['Amazon.de', amazon('Proscenic P20 OnePass')]] },
-          { name: 'Or any cordless stick in that range', price: 'up to €200',
-            spec: 'Dreame, Xiaomi, Tineco, Rowenta and Bosch all make one at this price. Look for a motorised brush head and a crevice tool; the rest is taste.',
-            links: [['Cordless sticks on idealo', idealo('Akku Staubsauger Elektrobürste')], ['Amazon.de', amazon('Akku Staubsauger Elektrobürste Teppich')]] }
+        reqs: [
+          'A chef’s knife around 20 cm and a paring knife. A serrated bread knife would be the optional third. Max three.',
+          'German-style stainless steel (the Zwilling, Wüsthof, Victorinox kind): tough, and a few pulls through a sharpener keeps it sharp. Not hard Japanese steel that chips and needs a whetstone.',
+          'Forged or stamped are both fine. A comfortable handle matters more than the brand.',
+          'Under €150 all in. A small pull-through sharpener thrown in would be the perfect extra.'
         ],
         note: '' }
+    ]},
+    { title: 'Around the flat', sub: '', items: [
+      { id: 'vacuum', name: 'A Dyson cordless vacuum', slots: 1,
+        why: 'The one thing it must do: pull long hair out of the carpet, so it needs Dyson’s Motorbar head with the anti-tangle vanes and real suction. Beyond that, sofa cushions, corners, the balcony and the cobwebs on the ceiling, so it converts to a handheld with a crevice tool. We want one that lasts, hence Dyson. Budget up to €350.',
+        picks: [
+          { name: 'Dyson V8 Cyclone (Motorbar)', price: 'approx. €300 to 400',
+            spec: 'The current V8: 150 AW suction, up to 60 minutes, 0.54 L bin, 2.6 kg. Comes with the Motorbar anti-tangle head, a crevice tool and a wall dock. List price €399; Dyson.de sells it for €299 with the code DYSON shown on their own page.',
+            links: [['Dyson.de', 'https://www.dyson.de/staubsauger/kabellos/v8-cyclone/motorbar-schwarz'], ['Compare prices on idealo', idealo('Dyson V8 Cyclone')]] },
+          { name: 'Dyson V8 Absolute', price: 'approx. €330 to 350',
+            spec: 'The long-running V8 with the fuller kit: Motorbar head plus the Fluffy soft-roller head for hard floors, hair screw tool, crevice and combination tools. 115 AW, up to 40 minutes, 2.5 kg. Sold out on Dyson.de, widely stocked elsewhere.',
+            links: [['Compare prices on idealo', idealo('Dyson V8 Absolute')], ['Geizhals', 'https://geizhals.de/?fs=dyson+v8+absolute']] }
+        ],
+        note: 'Either one does the hair job. The Motorbar head is the part that matters; the rest is tools.' }
     ]}
   ];
 
@@ -322,8 +320,9 @@ footer p { margin: 0 0 10px; }
         el('h2', null, g.title),
         g.sub ? el('p', { class: 'group-sub' }, g.sub) : null);
       for (const item of g.items) {
-        const picks = el('ul', { class: 'picks' });
-        for (const p of item.picks) {
+        const reqs = item.reqs && item.reqs.length ? el('ul', { class: 'reqs' }, ...item.reqs.map(t => el('li', null, t))) : null;
+        const picks = item.picks && item.picks.length ? el('ul', { class: 'picks' }) : null;
+        for (const p of item.picks || []) {
           const links = el('p', { class: 'links' });
           p.links.forEach(([label, url]) => links.append(el('a', { href: url, target: '_blank', rel: 'noopener' }, label)));
           picks.append(el('li', { class: 'pick' },
@@ -343,6 +342,7 @@ footer p { margin: 0 0 10px; }
           el('div', { class: 'gift-main' },
             el('h3', null, item.name),
             el('p', { class: 'why' }, item.why),
+            reqs,
             picks,
             item.note ? el('p', { class: 'note' }, item.note) : null),
           claimCol));
